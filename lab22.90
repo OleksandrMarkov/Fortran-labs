@@ -1,0 +1,53 @@
+! Дано: натуральне число N, масив цілих чисел A(N).
+! З’ясувати, яке число в масиві зустрічається частіше – додатне чи від’ємне. 
+! Якщо всі члени масиву дорівнюють нулю, вивести повідомлення про це. 
+
+program lab2
+    implicit none
+    integer, parameter :: N = 12
+    integer, dimension (N) :: myArray ! масив елементів
+    integer, dimension (N) ::  visited = 0 ! "відвідані" елементи
+
+    integer :: i, j ! ітератори
+    integer :: all_zeros = 1 ! всі члени масиву нулі
+    integer :: freq = 1 ! скільки разів зустрічається частіше
+    integer :: max_freq = 1 ! найбільша частота
+    integer :: the_most_freq = 0 ! число, що зустрічається найчастіше
+
+    myArray = (/-2, 5, 5, 5, 0, 0, -7, 1, 1, 10, 4, -3/)
+
+    do i = 1, N
+        if ( myArray(i) .ne. 0) then
+            all_zeros = 0
+            exit
+        end if
+    end do
+
+    if ( all_zeros .eq. 1) then
+        print *, "All array elements are zeros!"
+    else
+        do i = 1, N
+            if (visited(i) .ne. 1) then
+                freq = 1
+                do j = i + 1, N
+                    if (myArray(i) .eq. myArray(j) ) then
+                        freq = freq + 1
+                        visited(j) = 1
+                    end if
+                end do
+                if ( freq > max_freq) then
+                    the_most_freq = myArray(i)
+                    max_freq = freq
+                end if
+            end if
+        end do
+        if ( the_most_freq > 0) then
+            print *, "The most frequent number is positive"
+        else if ( the_most_freq < 0) then
+            print *, "The most frequent number is negative"
+        else
+            print *, "The most frequent number is 0"
+        end if
+    end if
+
+end program lab2
