@@ -6,10 +6,9 @@ program lab2
     implicit none
     integer, parameter :: N = 12
     integer, dimension (N) :: myArray ! масив
-    integer :: i, ! ітератор
-    integer :: counter = 0
-    
-    myArray = (/0, 0, -3, 0, 0, 0, 1, 0, 0, 0, 0, 0/)
+    integer :: i ! ітератор
+
+    myArray = (/0, 2, 0, -4, 0, 0, 0, 0, 0, 0, 0, 0/)
 
     do i = 1, N
         if ( myArray(i) > 0) then
@@ -19,10 +18,9 @@ program lab2
             print *, "The first no-zero elements is negative"
             exit
         end if
-        counter = counter + 1
     end do
 
-    if (counter == N ) then
+    if (i - 1 == N ) then
         print *, "All array elements are zeros!"
     end if
 
